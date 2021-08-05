@@ -658,7 +658,7 @@ static void parse_args(int argc, char* argv[])
 
 static inline void print_header()
 {
-  printf("bytes,tp,conns_open,conns_closed,conn_bytes_min,conn_bytes_max,jfi\n");
+  printf("time_ns,bytes,tp,conns_open,conns_closed,conn_bytes_min,conn_bytes_max,jfi\n");
   fflush(stdout);
 }
 
@@ -710,8 +710,8 @@ static void collect_benchmark(struct core *cs, struct benchmark *b)
 
 static void print_benchmark(struct benchmark *b)
 {
-  printf("%lu,%'.2Lf,%u,%u,%lu,%lu,%Lf\n",
-      b->bytes, b->tp, b->conns_open, b->conns_closed,
+  printf("%lu,%lu,%'.2Lf,%u,%u,%lu,%lu,%Lf\n",
+      b->t_prev, b->bytes, b->tp, b->conns_open, b->conns_closed,
       b->conn_bytes_min, b->conn_bytes_max, b->jfi);
   fflush(stdout);
 }

@@ -478,7 +478,7 @@ static void *thread_run(void *arg)
 
     for (i = 0; i < n; i++) {
       conn = evs[i].data.ptr;
-      if (c == NULL) {
+      if (conn == NULL) {
         /* the listening socket */
         if (evs[i].events != EPOLLIN) {
           FATAL_ERROR(coreid);

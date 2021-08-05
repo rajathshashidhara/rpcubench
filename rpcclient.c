@@ -706,7 +706,7 @@ static void init_benchmark(struct benchmark* b)
 
 static void print_header()
 {
-  printf("flows,tp,lat50p,lat90p,lat95p,lat99p,lat99.9p,lat99.99p");
+  printf("time_ns,flows,tp,lat50p,lat90p,lat95p,lat99p,lat99.9p,lat99.99p");
 #ifdef PRINT_JFI
   printf(",jfi,jfi-ewma");
 #endif
@@ -813,8 +813,8 @@ static void print_benchmark(struct benchmark *b)
   hist_fract_buckets(b->latency_hist, b->msg_total,
     fracs, fracs_pos, sizeof(fracs) / sizeof(fracs[0]));
 
-  printf("%u,%'.2Lf,%d,%d,%d,%d,%d,%d",
-        b->open_total, b->tp,
+  printf("%lu,%u,%'.2Lf,%d,%d,%d,%d,%d,%d",
+        b->t_prev, b->open_total, b->tp,
         hist_value(fracs_pos[0]), hist_value(fracs_pos[1]), hist_value(fracs_pos[2]),
         hist_value(fracs_pos[3]), hist_value(fracs_pos[4]), hist_value(fracs_pos[5]));
 #ifdef PRINT_JFI
